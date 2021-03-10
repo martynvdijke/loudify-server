@@ -9,11 +9,11 @@ repos:
     -   id: check-toml
     -   id: detect-private-key
     # -   id: name-tests-test
--   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.8.4
-    hooks:
-    -   id: flake8
-        additional_dependencies: [flake8-typing-imports==1.10.0]
+# -   repo: https://gitlab.com/pycqa/flake8
+#     rev: 3.8.4
+#     hooks:
+#     -   id: flake8
+#         additional_dependencies: [flake8-typing-imports==1.10.0]
 
 -   repo: https://github.com/pre-commit/mirrors-autopep8
     rev: v1.5.4

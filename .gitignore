@@ -18,6 +18,7 @@ update/*
 build/*
 .mypy_cache/*
 dist/*
+publish/*
 
 
 ### PyCharm ###

@@ -56,7 +56,7 @@ jobs:
       - name: Add new exported documentation and push to gh-pages branch
         working-directory: ${{runner.workspace}}
         run: |
-          cp -r ${{runner.workspace}}/dev-docs/build/docs/doxygen/html ${{runner.workspace}}/gh-pages/
+          cp -r ${{runner.workspace}}/dev-docs/docs/_build/html ${{runner.workspace}}/gh-pages/
           cd ${{runner.workspace}}/gh-pages/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
