@@ -8,7 +8,7 @@
 ##virtual env
 virtualenv/*
 
-##
+## folders
 src/loudify.egg-info/*
 src/loudify.egg-info/*
 
@@ -16,6 +16,9 @@ update/*
 update/*
 
 build/*
+.mypy_cache/*
+dist/*
+
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

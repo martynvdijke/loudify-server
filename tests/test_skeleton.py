@@ -3,7 +3,7 @@ import pytest
 from loudify.skeleton import fib
 from loudify.skeleton import main
 
-__author__ = "Martyn"
+__author__ = "Martyn van Dijke"
 __copyright__ = "Martyn"
 __license__ = "MIT"
 
