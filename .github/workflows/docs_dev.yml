@@ -1,0 +1,71 @@
+name: docs-dev
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Debug
+
+jobs:
+  docs:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref : dev
+
+      - name: Check if venv is intact
+        working-directory: ${{runner.workspace}}
+        shell: bash
+        run: |
+          if [ ! -d "virtualenv" ]; then
+                python3 -m venv virtualenv
+                mkdir virtualenv/run
+          fi
+
+      - name: Use venv and install dependencies
+        working-directory: ${{runner.workspace}}
+        shell: bash
+        run: |
+          source thorparty/bin/activate
+          pip install -r requirements.txt
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/dev/build
+        shell: bash
+        # Execute the build.  You can specify a specific target with "--target <NAME>"
+        run: tox -e docs
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v2
+        with:
+          ref : gh-pages
+          path : 'gh-pages'
+
+      - name : Move gh-pages
+        working-directory: ${{runner.workspace}}
+        #move to folder up for easy use
+        run: |
+            mv gr-lora_sdr/gh-pages/ .
+        ##rm -rf gr-lora_sdr/gh-pages/
+
+      - name: Add new exported documentation and push to gh-pages branch
+        working-directory: ${{runner.workspace}}
+        run: |
+          cp -r ${{runner.workspace}}/dev-docs/build/docs/doxygen/html ${{runner.workspace}}/gh-pages/
+          cd ${{runner.workspace}}/gh-pages/
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Automatically updated the wiki" && git push
+          cd ../ && rm -rf gh-pages
+
+      - name: Remove build dir
+        working-directory: ${{runner.workspace}}
+        shell: bash
+        run: |
+          rm -rf dev-docs
