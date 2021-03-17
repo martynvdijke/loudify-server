@@ -4,10 +4,50 @@ loudify package
 Submodules
 ----------
 
-loudify.skeleton module
+loudify.authencation module
+---------------------------
+
+.. automodule:: loudify.authencation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+loudify.main module
+-------------------
+
+.. automodule:: loudify.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+loudify.reciever module
 -----------------------
 
-.. automodule:: loudify.skeleton
+.. automodule:: loudify.reciever
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+loudify.send\_back module
+-------------------------
+
+.. automodule:: loudify.send_back
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+loudify.wiregarud module
+------------------------
+
+.. automodule:: loudify.wiregarud
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+loudify.worker\_queue module
+----------------------------
+
+.. automodule:: loudify.worker_queue
    :members:
    :undoc-members:
    :show-inheritance:
