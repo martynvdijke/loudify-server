@@ -49,11 +49,11 @@ jobs:
         working-directory: ${{runner.workspace}}
         #move to folder up for easy use
         run: |
-            mv loudify/gh-pages/ .
+            mv loudify-server/gh-pages/ .
         ##rm -rf gr-lora_sdr/gh-pages/
 
       - name: Add new exported documentation and push to gh-pages branch
-        working-directory: ${{runner.workspace}}/loudify
+        working-directory: ${{runner.workspace}}/loudify-server
         run: |
           cp -r ${{runner.workspace}}/loudify-server/docs/_build/html ${{runner.workspace}}/gh-pages/
           cd ${{runner.workspace}}/gh-pages/
