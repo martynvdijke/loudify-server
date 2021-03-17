@@ -19,7 +19,7 @@ jobs:
           ref : dev
 
       - name: Check if venv is intact
-        working-directory: ${{runner.workspace}}/loudify
+        working-directory: ${{runner.workspace}}/loudify-server
         shell: bash
         run: |
           if [ ! -d "virtualenv" ]; then
@@ -28,14 +28,14 @@ jobs:
           fi
 
       - name: Use venv and install dependencies
-        working-directory: ${{runner.workspace}}/loudify
+        working-directory: ${{runner.workspace}}/loudify-server
         shell: bash
         run: |
           source virtualenv/bin/activate
           pip install -r requirements.txt
 
       - name: Build docs
-        working-directory: ${{runner.workspace}}/loudify/
+        working-directory: ${{runner.workspace}}/loudify-server
         shell: bash
         run: tox -e docs
 
@@ -55,7 +55,7 @@ jobs:
       - name: Add new exported documentation and push to gh-pages branch
         working-directory: ${{runner.workspace}}/loudify
         run: |
-          cp -r ${{runner.workspace}}/loudify/docs/_build/html ${{runner.workspace}}/gh-pages/
+          cp -r ${{runner.workspace}}/loudify-server/docs/_build/html ${{runner.workspace}}/gh-pages/
           cd ${{runner.workspace}}/gh-pages/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"

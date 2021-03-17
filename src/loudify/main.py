@@ -23,10 +23,13 @@ import argparse
 import logging
 import sys
 
+import zmq
+
+from . import reciever
 from loudify import __version__
 
-__author__ = "Martyn"
-__copyright__ = "Martyn"
+__author__ = "Martyn van Dijke"
+__copyright__ = "Martyn van Dijke"
 __license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
@@ -59,8 +62,6 @@ def fib(n):
 # The functions defined in this section are wrappers around the main Python
 # API allowing them to be called directly from the terminal as a CLI
 # executable/script.
-
-
 def parse_args(args):
     """Parse command line parameters
 
@@ -112,7 +113,7 @@ def setup_logging(loglevel):
     )
 
 
-def main(args):
+def main(args, _REQ_ADDR):
     """Wrapper allowing :func:`fib` to be called with string arguments in a CLI fashion
 
     Instead of returning the value from :func:`fib`, it prints the result to the
@@ -124,9 +125,12 @@ def main(args):
     """
     args = parse_args(args)
     setup_logging(args.loglevel)
-    _logger.debug("Starting crazy calculations...")
-    print("The {}-th Fibonacci number is {}".format(args.n, fib(args.n)))
-    _logger.info("Script ends here")
+    _logger.info("Starting loudify server")
+    _logger.debug("Current loudify server version %s" % __version__)
+    _logger.debug("Current libzmq version is %s" % zmq.zmq_version())
+    _logger.debug("Current  pyzmq version is %s" % zmq.__version__)
+    reciever.zmq_recieve(_REQ_ADDR, _logger)
+    _logger.info("Ending loudify server")
 
 
 def run():
@@ -134,7 +138,12 @@ def run():
 
     This function can be used as entry point to create console scripts with setuptools.
     """
-    main(sys.argv[1:])
+    # TODO: use config variables for stuff
+    _PROTOCOL = "tcp://"
+    _SERVER = "127.0.0.1"  # localhost
+    _REQ_PORT = ":50246"
+    _REQ_ADDR = _PROTOCOL + _SERVER + _REQ_PORT
+    main(sys.argv[1:], _REQ_ADDR)
 
 
 if __name__ == "__main__":
