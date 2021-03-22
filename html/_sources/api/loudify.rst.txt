@@ -1,6 +1,14 @@
 loudify package
 ===============
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   loudify.test
+
 Submodules
 ----------
 
